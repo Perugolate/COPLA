@@ -22,7 +22,7 @@ From: condaforge/miniforge3:24.11.3-0
     copla.ini /opt/copla/copla.ini
     bin /opt/copla/bin
     test /opt/copla/test
-    docker/copla-entrypoint.sh /usr/local/bin/copla
+    container/copla-entrypoint.sh /usr/local/bin/copla
 
 %environment
     export COPLA_HOME=/opt/copla
