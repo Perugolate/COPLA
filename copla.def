@@ -14,7 +14,9 @@
 # leaking into the container and overriding its pinned environments.
 
 Bootstrap: docker
-From: condaforge/miniforge3:24.11.3-0
+# Ubuntu 24.04 base: an older glibc breaks the host fakeroot binaries that
+# Apptainer injects when the user has no /etc/subuid entry
+From: condaforge/miniforge3:25.3.1-0
 
 %files
     copla.spec-file.txt /tmp/copla.spec-file.txt
