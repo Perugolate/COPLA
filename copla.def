@@ -19,8 +19,9 @@ Bootstrap: docker
 From: condaforge/miniforge3:25.3.1-0
 
 %files
-    copla.spec-file.txt /tmp/copla.spec-file.txt
-    macsyfinder.spec-file.txt /tmp/macsyfinder.spec-file.txt
+    # Not /tmp: Apptainer mounts its own /tmp over the image's during %post
+    copla.spec-file.txt /opt/copla/envs/copla.spec-file.txt
+    macsyfinder.spec-file.txt /opt/copla/envs/macsyfinder.spec-file.txt
     copla.ini /opt/copla/copla.ini
     bin /opt/copla/bin
     test /opt/copla/test
@@ -48,10 +49,9 @@ From: condaforge/miniforge3:25.3.1-0
     rm -rf /var/lib/apt/lists/*
 
     # Conda environments, built from the exact package lists used to develop COPLA
-    conda create -y -q -n copla --file /tmp/copla.spec-file.txt
-    conda create -y -q -n macsyfinder --file /tmp/macsyfinder.spec-file.txt
+    conda create -y -q -n copla --file /opt/copla/envs/copla.spec-file.txt
+    conda create -y -q -n macsyfinder --file /opt/copla/envs/macsyfinder.spec-file.txt
     conda clean -afy
-    rm /tmp/copla.spec-file.txt /tmp/macsyfinder.spec-file.txt
 
     # MacSyFinder 1.0.5 (Python 2) installed into its own environment
     MACSYFINDER_VERSION=1.0.5
